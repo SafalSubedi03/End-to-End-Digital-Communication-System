@@ -1,0 +1,36 @@
+%Signal Generation
+
+
+%Signal Parameters
+fs = 1000;          %sampling frequeny in hz
+t = 0: 1/fs : 1;    %time axis
+
+fm = 10;
+Am = 2;
+
+fc = 100;           %carrier frequency in hz
+Ac = 2;             %carrier Amplitude A
+
+
+%Signal Definition
+m_t = generateMessage(t,Am,fm);
+c_t = carrierSignal(t,fc);
+AM  = modulatedSignal(Ac,m_t,c_t);
+
+
+figure;
+subplot(3,1,1);
+plot(t,m_t);
+xlabel('TIme (s)');
+title('Message Signal');
+
+subplot(3,1,2);
+plot(t,c_t);
+xlabel('TIme (s)');
+title('Carrier Signal With A = 1');
+
+subplot(3,1,3);
+plot(t,AM);
+xlabel('TIme (s)');
+ylabel('AM Signal');
+title('AM Modulated Signal');
