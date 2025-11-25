@@ -1,0 +1,7 @@
+function y = HalfRectification( u )
+%HALFRECTIFICATION - Rectifies the in
+%   Detailed explanation goes here
+
+
+end
+
