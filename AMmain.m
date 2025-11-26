@@ -2,13 +2,13 @@
 
 
 %% Signal Parameters
-fs = 1000;          %sampling frequeny in hz
+fs = 10000;          %sampling frequeny in hz
 t = 0: 1/fs : 1;    %time axis
 
-fm = 10;
-Am = 2;
+fm = 20;
+Am = 1.2;
 
-fc = 100;           %carrier frequency in hz
+fc = 500;           %carrier frequency in hz
 Ac = 2;             %carrier Amplitude A
 
 
@@ -81,7 +81,34 @@ plot(t,Rectified_AM_W_Noise)
 xlabel('Time');
 title('Rectified Wave');
 
-% Che
+% Chebyshev Filter Approximation
+fcutoff = 40; %in Hz
+filterOrder = 4;
+Rp = 1; %passband ripple in db
+
+%Normalized cutoff freq
+wn = fcutoff / (fs/2);
+[num,den] = cheby1(filterOrder,Rp,wn,'low');
+Filtered_Rectified_AM_W_Noise = filter(num,den,Rectified_AM_W_Noise);
+
+%Remove the DC offset
+demod = Filtered_Rectified_AM_W_Noise - mean(Filtered_Rectified_AM_W_Noise);
+
+% Plot Original Message vs Demodulated Signal
+figure;
+plot(t, m_t, 'b', 'LineWidth', 1.5);
+hold on;
+plot(t, demod, 'r', 'LineWidth', 1.5);
+hold off;
+
+xlabel('Time (s)');
+ylabel('Amplitude');
+title('Original Message vs Demodulated AM Signal');
+legend('Original Message', 'Demodulated Signal');
+grid on;
+
+
+
 
 
 

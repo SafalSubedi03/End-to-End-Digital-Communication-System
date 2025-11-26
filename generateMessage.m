@@ -1,4 +1,4 @@
-function m = generateMessage(t,Am,fm)
-    m = Am * cos(2*pi*fm*t);    
+function m = generateMessage(t, Am, fm)
+    % Generate a message signal 
+    m = Am * cos(2*pi*fm.*t);
 end
-    
