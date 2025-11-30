@@ -2,16 +2,16 @@
 
 
 %% Signal Parameters
-fs = 10000;         %sampling frequeny in hz
-t = 0: 1/fs : 0.6;    %time axis
+fs = 2000;         %sampling frequeny in hz
+t = 0: 1/fs : 1;    %time axis
 
-fm =40;
+fm =10;
 Am = 1.2;
 
-fc = 1500;           %carrier frequency in hz
+fc = 250;           %carrier frequency in hz
 Ac = 1;             %carrier Amplitude A
 kp = 15;             %phase constant val
-kf = 2000;
+kf = 500;
 
 %% Signal Definition
 
@@ -58,5 +58,12 @@ title('Frequency Domain oF FM Signal');
 %%Notes:
 %The frequency of the modulated signal is centered around fc
 %The bandwidth is given by Bfm = 2*(delf + B), where delf = kf * mp and B is the maximum freq/ bandwidth of the signal m(t) 
+
+%% For simulink data purpose and demodulation 
+t = t(:);
+FM = FM(:);
+m_t = m_t(:);
+MData = [t FM];
+Data = [t m_t];
 
 
